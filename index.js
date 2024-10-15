@@ -13,8 +13,10 @@ const rl = readline.createInterface({
 });
 
 const targetBot = process.env.TARGET_BOT_USERNAME;
-const message = process.env.TRIGGER_MESSAGE;
 const devAccount = process.env.DEV_USERNAME;
+let message = process.env.TRIGGER_MESSAGE;
+
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 (async () => {
   console.log("Loading interactive example...");
@@ -41,20 +43,20 @@ const devAccount = process.env.DEV_USERNAME;
 
   const check = async () => {
     const sentMsg = await client.sendMessage(targetBot, { message });
-    await new Promise((resolve) => setTimeout(resolve, 5000));
+    await delay(5000);
     const lastMsg = await client.getMessages(targetBot, { limit: 1 });
   
     if (sentMsg.id < lastMsg[0].id) {
-      const msg = "Bot is working fine!"
-      console.log(msg);
-      await client.sendMessage(devAccount, { message: msg, silent: true });
+      message = "Bot is working fine!"
+      console.log(message);
+      await client.sendMessage(devAccount, { message });
     } else {
-      const msg = "Bot is not working!"
-      console.log(msg);
-      await client.sendMessage(devAccount, { message: msg });
+      message = "Bot is not working!"
+      console.log(message);
+      await client.sendMessage(devAccount, { message });
     }
 
-    await new Promise((resolve) => setTimeout(resolve, 1 * 60 * 1000));
+    await delay(1 * 60 * 1000);
     check();
   }
 
