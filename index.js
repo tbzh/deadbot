@@ -41,15 +41,17 @@ const devAccount = process.env.DEV_USERNAME;
 
   const check = async () => {
     const sentMsg = await client.sendMessage(targetBot, { message });
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    await new Promise((resolve) => setTimeout(resolve, 5000));
     const lastMsg = await client.getMessages(targetBot, { limit: 1 });
   
     if (sentMsg.id < lastMsg[0].id) {
-      console.log("Bot is working fine!");
+      const msg = "Bot is working fine!"
+      console.log(msg);
+      await client.sendMessage(devAccount, { message: msg, silent: true });
     } else {
-      console.log("Bot is not working!");
-      // send message to owner
-      await client.sendMessage(devAccount, { message: "Bot is not working!" });
+      const msg = "Bot is not working!"
+      console.log(msg);
+      await client.sendMessage(devAccount, { message: msg });
     }
   }
   
