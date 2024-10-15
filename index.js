@@ -14,7 +14,6 @@ const rl = readline.createInterface({
 
 const targetBot = process.env.TARGET_BOT_USERNAME;
 const devAccount = process.env.DEV_USERNAME;
-let message = process.env.TRIGGER_MESSAGE;
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -42,6 +41,7 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   console.log(client.session.save()); // Save this string to avoid logging in again
 
   const check = async () => {
+    let message = process.env.TRIGGER_MESSAGE;
     const sentMsg = await client.sendMessage(targetBot, { message });
     await delay(5000);
     const lastMsg = await client.getMessages(targetBot, { limit: 1 });
