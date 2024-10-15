@@ -56,7 +56,7 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
       await client.sendMessage(devAccount, { message });
     }
 
-    await delay(1 * 60 * 1000);
+    await delay(5 * 60 * 1000);
     check();
   }
 
