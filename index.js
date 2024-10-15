@@ -49,7 +49,7 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
     if (sentMsg.id < lastMsg[0].id) {
       message = "Bot is working fine!"
       console.log(message);
-      await client.sendMessage(devAccount, { message });
+      await client.sendMessage(devAccount, { message, silent: true });
     } else {
       message = "Bot is not working!"
       console.log(message);
