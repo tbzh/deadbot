@@ -53,8 +53,10 @@ const devAccount = process.env.DEV_USERNAME;
       console.log(msg);
       await client.sendMessage(devAccount, { message: msg });
     }
+
+    await new Promise((resolve) => setTimeout(resolve, 1 * 60 * 1000));
+    check();
   }
-  
-  // run check every 1 minute
-  setInterval(check, 1 * 60 * 1000);
+
+  check();
 })();
